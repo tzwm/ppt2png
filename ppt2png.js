@@ -1,6 +1,7 @@
 var exec = require('child_process').exec;
 
-exports.ppt2png = function(input, output, callback) {
+
+var ppt2png = function(input, output, callback) {
   exec('unoconv -f pdf -o ' + output + '.pdf ' + input, 
       function( error, stdout, stderr) {
         //console.log('unoconv stdout: ', stdout);
@@ -45,6 +46,7 @@ var ppt2jpg = function(input, output) {
       });
 }
 
+module.exports = ppt2png;
 
 //exports.ppt2png('240.pptx', 'img/out', function(){
   //console.log('sss'); 
