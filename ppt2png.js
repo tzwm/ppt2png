@@ -7,7 +7,7 @@ var ppt2png = function(input, output, callback) {
         //console.log('unoconv stdout: ', stdout);
         //console.log('unoconv stderr: ', stderr);
         if (error !== null) {
-          console.log('unoconv error: ', error);
+          callback(error);
         } else {
           pdf2png(output+'.pdf', output+'.png', callback);
         }
@@ -20,9 +20,9 @@ var pdf2png = function(input, output, callback) {
         //console.log('convert stdout: ', stdout);
         //console.log('convert stderr: ', stderr);
         if (error !== null) {
-          console.log('convert err: ', error);
+          callback(error);
         } else {
-          callback();
+          callback(null);
         }
       });
 }
