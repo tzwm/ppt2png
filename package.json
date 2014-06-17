@@ -1,6 +1,6 @@
 {
   "name": "ppt2png",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Convert documents from ppt to png using unoconv and ImageMagick convert.",
   "main": "ppt2png.js",
   "scripts": {

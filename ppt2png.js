@@ -1,28 +1,35 @@
-var exec = require('child_process').exec;
+var exec = require('child_process').exec,
+    fs = require('fs');
 
 
 var ppt2png = function(input, output, callback) {
-  exec('unoconv -f pdf -o ' + output + '.pdf ' + input, 
+  exec('time unoconv -f pdf -o ' + output + '.pdf ' + input, 
       function( error, stdout, stderr) {
         //console.log('unoconv stdout: ', stdout);
         //console.log('unoconv stderr: ', stderr);
         if (error !== null) {
           callback(error);
         } else {
-          pdf2png(output+'.pdf', output+'.png', callback);
+          pdf2png(output+'.pdf', output, callback);
         }
       });
 }
 
 var pdf2png = function(input, output, callback) {
-  exec('convert -resize 1800 -colorspace RGB -density 300 ' + input + ' ' + output, 
+  exec('time convert -resize 1200 -colorspace RGB -density 200 ' + input + ' ' + output+'.png', 
       function (error, stdout, stderr) {
         //console.log('convert stdout: ', stdout);
         //console.log('convert stderr: ', stderr);
         if (error !== null) {
           callback(error);
         } else {
-          callback(null);
+          fs.unlink(input, function(err) {
+            if(err) {
+              console.log(err);
+            } else {
+              callback(null);
+            }
+          });
         }
       });
 }
@@ -48,8 +55,10 @@ var ppt2jpg = function(input, output) {
 
 module.exports = ppt2png;
 
-//exports.ppt2png('240.pptx', 'img/out', function(){
-  //console.log('sss'); 
-//});
 
-//ppt2jpg('240.pptx', 'img');
+// Sample
+//ppt2jpg('tmp.pptx', 'img');
+
+//ppt2png('tmp.pptx', './out/img', function(err) {
+  //console.log(err);
+//});
