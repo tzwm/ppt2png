@@ -16,7 +16,7 @@ var ppt2png = function(input, output, callback) {
 }
 
 var pdf2png = function(input, output, callback) {
-  exec('time convert -resize 1200 -colorspace RGB -density 200 ' + input + ' ' + output+'.png', 
+  exec('time convert -resize 1200 -density 200 ' + input + ' ' + output+'.png', 
       function (error, stdout, stderr) {
         //console.log('convert stdout: ', stdout);
         //console.log('convert stderr: ', stderr);
